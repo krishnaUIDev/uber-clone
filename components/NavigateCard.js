@@ -8,12 +8,13 @@ import {
 } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-import { GOOGLE_MAPS_APIKEY } from "@env";
-import { setDesination } from "../slices/navSlice";
 import { useDispatch } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
-import NavFavourites from "./NavFavourites";
 import { Icon } from "react-native-elements";
+
+import { GOOGLE_MAPS_APIKEY } from "@env";
+import { setDesination } from "../slices/navSlice";
+import NavFavourites from "./NavFavourites";
 
 const NavigateCard = () => {
   const dispatch = useDispatch();

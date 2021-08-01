@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View, SafeAreaView, Image } from "react-native";
+import { StyleSheet, View, SafeAreaView, Image } from "react-native";
 import tw from "tailwind-react-native-classnames";
-import NavOptions from "../components/NavOptions";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_MAPS_APIKEY } from "@env";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+
+import NavOptions from "../components/NavOptions";
 import { setOrigin } from "../slices/navSlice";
 import NavFavourites from "../components/NavFavourites";
 

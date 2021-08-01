@@ -1,9 +1,10 @@
 import React, { useRef, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import tw from "tailwind-react-native-classnames";
 import { useDispatch, useSelector } from "react-redux";
 import MapViewDirections from "react-native-maps-directions";
+
 import {
   selectDesination,
   selectOrigin,

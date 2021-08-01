@@ -4,6 +4,7 @@ import { Icon } from "react-native-elements/dist/icons/Icon";
 import tw from "tailwind-react-native-classnames";
 import { useNavigation } from "@react-navigation/core";
 import { useSelector } from "react-redux";
+
 import { selectOrigin } from "../slices/navSlice";
 
 const data = [
