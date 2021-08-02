@@ -35,12 +35,12 @@ const HomeScreen = () => {
         >
           <Icon name="menu" />
         </TouchableOpacity>
-        <Image
+        {/* <Image
           style={{ width: 100, height: 80, resizeMode: "contain" }}
           source={{
             uri: "https://links.papareact.com/gzs",
           }}
-        />
+        /> */}
         <HeroCard />
         <GooglePlacesAutocomplete
           styles={{

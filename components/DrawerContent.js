@@ -94,6 +94,20 @@ export function DrawerContent(props) {
           <DrawerItem
             icon={({ color, size }) => (
               <Icon
+                name="home-sharp"
+                type="ionicon"
+                color={color}
+                size={size}
+              />
+            )}
+            label="Home"
+            onPress={() => {
+              props.navigation.navigate("HomeScreen");
+            }}
+          />
+          <DrawerItem
+            icon={({ color, size }) => (
+              <Icon
                 name="analytics-sharp"
                 type="ionicon"
                 color={color}
@@ -102,7 +116,7 @@ export function DrawerContent(props) {
             )}
             label="Your trips"
             onPress={() => {
-              props.navigation.navigate("Home");
+              props.navigation.navigate("Trips");
             }}
           />
           <DrawerItem
@@ -114,9 +128,14 @@ export function DrawerContent(props) {
                 size={size}
               />
             )}
-            label="Wallet"
+            label={() => (
+              <>
+                <Text style={tw`text-sm text-gray-600`}>Wallet</Text>
+                <Text style={tw`text-xs font-light`}>Cash</Text>
+              </>
+            )}
             onPress={() => {
-              props.navigation.navigate("Profile");
+              props.navigation.navigate("Wallet");
             }}
           />
           <DrawerItem
@@ -130,7 +149,7 @@ export function DrawerContent(props) {
             )}
             label="Help"
             onPress={() => {
-              props.navigation.navigate("BookmarkScreen");
+              props.navigation.navigate("Help");
             }}
           />
           <DrawerItem
@@ -144,7 +163,7 @@ export function DrawerContent(props) {
             )}
             label="Send a Gift"
             onPress={() => {
-              props.navigation.navigate("SettingsScreen");
+              props.navigation.navigate("Gift");
             }}
           />
           <DrawerItem
@@ -153,7 +172,7 @@ export function DrawerContent(props) {
             )}
             label="Settings"
             onPress={() => {
-              props.navigation.navigate("SupportScreen");
+              props.navigation.navigate("Settings");
             }}
           />
         </Drawer.Section>
