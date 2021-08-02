@@ -8,20 +8,26 @@ import {
 } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 import { Icon } from "react-native-elements";
 
 import { GOOGLE_MAPS_APIKEY } from "@env";
-import { setDesination } from "../slices/navSlice";
+import { setDesination, selectDesination } from "../slices/navSlice";
 import NavFavourites from "./NavFavourites";
+
+const hour = new Date().getHours();
+const Time =
+  "Good " +
+  ((hour < 12 && "Morning") || (hour < 18 && "Afternoon") || "Evening");
 
 const NavigateCard = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const destination = useSelector(selectDesination);
   return (
     <SafeAreaView style={tw`bg-white flex-1`}>
-      <Text style={tw`text-center py-5 text-xl`}>Good Morning, Krishna</Text>
+      <Text style={tw`text-center py-5 text-xl`}>{Time}, Krishna</Text>
       <View style={tw`border-t border-gray-200 flex-shrink`}>
         <View>
           <GooglePlacesAutocomplete
@@ -55,7 +61,10 @@ const NavigateCard = () => {
       >
         <TouchableOpacity
           onPress={() => navigation.navigate("RideOptionsCard")}
-          style={tw`flex flex-row bg-black w-24 justify-between  px-4 py-3 rounded-full`}
+          disabled={!destination}
+          style={tw`flex flex-row bg-black w-24 justify-between  px-4 py-3 rounded-full  ${
+            !destination && "bg-gray-300"
+          }`}
         >
           <Icon name="car" type="font-awesome" color="white" size={16} />
           <Text style={tw`text-white text-center`}>Rides</Text>

@@ -20,19 +20,49 @@ const data = [
     id: "Uber-X",
     title: "UberX",
     multiplier: 1,
-    image: "https://links.papareact.com/3pn",
+    occupency: 3,
+    image:
+      "https://res.cloudinary.com/dkenwnhn8/image/upload/v1627844215/uber-assets/UberX_slzxf1.webp",
+  },
+  {
+    id: "Uber-Pet",
+    title: "Uber Pet",
+    multiplier: 1.2,
+    occupency: 3,
+    image:
+      "https://res.cloudinary.com/dkenwnhn8/image/upload/v1627844344/uber-assets/UberX_Pet_uwu6wy.png",
   },
   {
     id: "Uber-XL",
     title: "Uber XL",
-    multiplier: 1.2,
-    image: "https://links.papareact.com/5w8",
+    occupency: 5,
+    multiplier: 1.4,
+    image:
+      "https://res.cloudinary.com/dkenwnhn8/image/upload/v1627844344/uber-assets/UberXL_g7akai.webp",
   },
   {
-    id: "Uber-LUX",
-    title: "Uber LUX",
+    id: "Comfort",
+    title: "Comfort",
+    occupency: 5,
+    multiplier: 1.5,
+    image:
+      "https://res.cloudinary.com/dkenwnhn8/image/upload/v1627844215/uber-assets/UberX_slzxf1.webp",
+  },
+  {
+    id: "Black",
+    title: "Black",
+    occupency: 3,
     multiplier: 1.75,
-    image: "https://links.papareact.com/7pf",
+    image:
+      "https://res.cloudinary.com/dkenwnhn8/image/upload/v1627844344/uber-assets/Black_v1_hgs0ns.png",
+  },
+  {
+    id: "Black-SUV",
+    title: "Black SUV",
+    multiplier: 2,
+    occupency: 5,
+    image:
+      "https://res.cloudinary.com/dkenwnhn8/image/upload/v1627844344/uber-assets/BlackSUV_v1_mzvzwk.png",
   },
 ];
 // surge charge rate
@@ -59,7 +89,10 @@ const RideOptionsCard = () => {
         data={data}
         style={tw`h-4`}
         keyExtractor={(item) => item.id}
-        renderItem={({ item: { image, title, multiplier, id }, item }) => (
+        renderItem={({
+          item: { image, title, multiplier, id, occupency },
+          item,
+        }) => (
           <TouchableOpacity
             style={tw`flex-row justify-between items-center px-2 ${
               id === selected?.id && "bg-gray-200"
@@ -67,21 +100,40 @@ const RideOptionsCard = () => {
             onPress={() => setSelected(item)}
           >
             <Image
-              style={{
-                width: 100,
-                height: 100,
-                resizeMode: "contain",
-              }}
+              style={[
+                tw`mr-3`,
+                {
+                  width: 80,
+                  height: 80,
+                  resizeMode: "contain",
+                },
+              ]}
               source={{ uri: image }}
             />
             <View style={tw`-ml-6`}>
-              <Text style={tw`text-xl font-semibold`}>{title}</Text>
-              <Text>{travelTimeInfo?.duration?.text} Travel Time</Text>
+              <View style={tw`flex flex-row items-center`}>
+                <Text style={tw`text-xl font-semibold`}>{title}</Text>
+                {id === selected?.id && (
+                  <>
+                    <Icon
+                      style={tw`ml-2`}
+                      size={16}
+                      name="people"
+                      type="ionicon"
+                    />
+                    <Text style={tw`ml-1`}>{selected?.occupency}</Text>
+                  </>
+                )}
+              </View>
+
+              <Text style={tw`flex flex-wrap`}>
+                {travelTimeInfo?.duration?.text} Travel Time
+              </Text>
             </View>
             <Text style={tw`text-xl`}>
-              {new Intl.NumberFormat("en-gb", {
+              {new Intl.NumberFormat("en-US", {
                 style: "currency",
-                currency: "GBP",
+                currency: "USD",
               }).format(
                 (travelTimeInfo?.duration?.value *
                   SURGE_CHARGE_RATE *

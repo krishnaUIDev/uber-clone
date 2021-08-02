@@ -1,32 +1,49 @@
 import React from "react";
-import { StyleSheet, View, SafeAreaView, Image } from "react-native";
+import {
+  StyleSheet,
+  View,
+  SafeAreaView,
+  Image,
+  TouchableOpacity,
+} from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_MAPS_APIKEY } from "@env";
 import { useDispatch } from "react-redux";
+import { Icon } from "react-native-elements";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import NavOptions from "../components/NavOptions";
-import { setOrigin } from "../slices/navSlice";
+import { setDesination, setOrigin } from "../slices/navSlice";
 import NavFavourites from "../components/NavFavourites";
+import HeroCard from "../components/HeroCard";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
+  const Drawer = createDrawerNavigator();
+
   return (
     <SafeAreaView style={tw`bg-white h-full`}>
       <View style={tw`p-5`}>
+        <TouchableOpacity style={tw`z-50 p-3 absolute left-4`}>
+          <Icon name="menu" />
+        </TouchableOpacity>
         <Image
-          style={{ width: 100, height: 100, resizeMode: "contain" }}
+          style={{ width: 100, height: 80, resizeMode: "contain" }}
           source={{
             uri: "https://links.papareact.com/gzs",
           }}
         />
+        <HeroCard />
         <GooglePlacesAutocomplete
           styles={{
             container: {
               flex: 0,
             },
             textInput: {
-              fontSize: 18,
+              backgroundColor: "#DDDDDF",
+              borderRadius: 0,
+              fontSize: 16,
             },
           }}
           enablePoweredByContainer={false}
@@ -42,6 +59,7 @@ const HomeScreen = () => {
                 description: data.description,
               })
             );
+            dispatch(setDesination(null));
           }}
           fetchDetails={true}
           query={{
