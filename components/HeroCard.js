@@ -55,19 +55,40 @@ const data = [
 ];
 
 const HeroCard = () => {
+  const numColumns = 3;
+
+  const formatData = (data, numColumns) => {
+    const numberOfFullRows = Math.floor(data.length / numColumns);
+
+    let numberOfElementsLastRow = data.length - numberOfFullRows * numColumns;
+    while (
+      numberOfElementsLastRow !== numColumns &&
+      numberOfElementsLastRow !== 0
+    ) {
+      data.push({ id: `blank-${numberOfElementsLastRow}`, empty: true });
+      numberOfElementsLastRow++;
+    }
+
+    return data;
+  };
   return (
     <FlatList
-      data={data}
+      data={formatData(data, numColumns)}
+      // data={data}
       keyExtractor={(item) => item.id}
-      horizontal
+      // horizontal
+      numColumns={numColumns}
       renderItem={({ item: { label, image, banner } }) => (
         <View style={tw`p-2 flex-1`}>
-          <TouchableOpacity style={tw`bg-gray-100 my-4 mr-2 h-20 rounded-lg`}>
+          <TouchableOpacity
+            style={tw`bg-gray-100 my-4 mr-2 h-20 rounded-lg items-center`}
+          >
             <Image
               style={{
-                width: 40,
-                height: 40,
-                padding: 32,
+                width: 20,
+                height: 18,
+                padding: 22,
+                marginTop: 10,
                 resizeMode: "contain",
                 alignItems: "center",
               }}

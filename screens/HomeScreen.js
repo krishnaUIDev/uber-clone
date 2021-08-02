@@ -11,21 +11,28 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import { GOOGLE_MAPS_APIKEY } from "@env";
 import { useDispatch } from "react-redux";
 import { Icon } from "react-native-elements";
-import { createDrawerNavigator } from "@react-navigation/drawer";
 
 import NavOptions from "../components/NavOptions";
 import { setDesination, setOrigin } from "../slices/navSlice";
 import NavFavourites from "../components/NavFavourites";
 import HeroCard from "../components/HeroCard";
+import { useNavigation } from "@react-navigation/native";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-  const Drawer = createDrawerNavigator();
+  const navigation = useNavigation();
+
+  const handleMenu = () => {
+    navigation.openDrawer();
+  };
 
   return (
     <SafeAreaView style={tw`bg-white h-full`}>
       <View style={tw`p-5`}>
-        <TouchableOpacity style={tw`z-50 p-3 absolute left-4`}>
+        <TouchableOpacity
+          style={tw`z-50 p-3 absolute left-4`}
+          onPress={handleMenu}
+        >
           <Icon name="menu" />
         </TouchableOpacity>
         <Image

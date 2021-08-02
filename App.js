@@ -1,16 +1,16 @@
 import React from "react";
 import { KeyboardAvoidingView, Platform } from "react-native";
 import { Provider } from "react-redux";
-import HomeScreen from "./screens/HomeScreen";
-import MapScreen from "./screens/MapScreen";
 import { store } from "./store";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import Home from "./screens/Home";
+import { DrawerContent } from "./components/DrawerContent";
 
 export default function App() {
-  const Stack = createStackNavigator();
+  const Drawer = createDrawerNavigator();
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -20,18 +20,11 @@ export default function App() {
             keyboardVerticalOffset={Platform.OS === "ios" ? -64 : 0}
             style={{ flex: 1 }}
           >
-            <Stack.Navigator>
-              <Stack.Screen
-                name="HomeScreen"
-                component={HomeScreen}
-                options={{ headerShown: false }}
-              />
-              <Stack.Screen
-                name="MapScreen"
-                component={MapScreen}
-                options={{ headerShown: false }}
-              />
-            </Stack.Navigator>
+            <Drawer.Navigator
+              drawerContent={(props) => <DrawerContent {...props} />}
+            >
+              <Drawer.Screen name="HomeScreen" component={Home} />
+            </Drawer.Navigator>
           </KeyboardAvoidingView>
         </SafeAreaProvider>
       </NavigationContainer>
