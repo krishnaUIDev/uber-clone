@@ -16,9 +16,45 @@ import { Icon } from "react-native-elements";
 import { setTheme, getTheme } from "../slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
+const drawerItems = [
+  {
+    id: 1,
+    label: "Home",
+    icon: "home-sharp",
+    to: "HomeScreen",
+  },
+  {
+    id: 2,
+    label: "Wallet",
+    icon: "wallet-sharp",
+    to: "Wallet",
+    subType: "Cash",
+  },
+  {
+    id: 3,
+    label: "Send a Gift",
+    icon: "gift-sharp",
+    to: "Gift",
+  },
+  {
+    id: 4,
+    label: "Settings",
+    icon: "cog-sharp",
+    to: "Settings",
+  },
+  {
+    id: 5,
+    label: "Help",
+    icon: "help-sharp",
+    to: "Help",
+  },
+];
+
 export function DrawerContent(props) {
   const dispatch = useDispatch();
   const selectedTheme = useSelector(getTheme);
+  const [selected, setSelected] = React.useState(null);
+
   return (
     <View style={{ flex: 1 }}>
       <View style={tw`bg-black`}>
@@ -32,7 +68,12 @@ export function DrawerContent(props) {
             size={50}
           />
           <View style={{ marginLeft: 15, flexDirection: "column" }}>
-            <Title style={tw`text-white text-base font-semibold `}>
+            <Title
+              style={tw`text-white text-base font-semibold `}
+              onPress={() => {
+                props.navigation.navigate("EditAccount");
+              }}
+            >
               Krishna Kanth
             </Title>
             <Caption style={tw`text-white text-xs font-normal`}>
@@ -91,90 +132,37 @@ export function DrawerContent(props) {
         contentContainerStyle={{ paddingTop: 0 }}
       >
         <Drawer.Section style={styles.drawerSection}>
-          <DrawerItem
-            icon={({ color, size }) => (
-              <Icon
-                name="home-sharp"
-                type="ionicon"
-                color={color}
-                size={size}
+          {drawerItems &&
+            drawerItems.map((item) => (
+              <DrawerItem
+                style={tw`${item.id === selected?.id && "bg-gray-200"}`}
+                key={item?.id}
+                icon={({ color, size }) => (
+                  <Icon
+                    name={item?.icon}
+                    type="ionicon"
+                    color={color}
+                    size={size}
+                  />
+                )}
+                label={() => (
+                  <>
+                    <Text style={tw`text-sm text-gray-600 font-normal`}>
+                      {item?.label}
+                    </Text>
+                    {item?.subType && (
+                      <Text style={tw`text-xs font-light`}>
+                        {item?.subType}
+                      </Text>
+                    )}
+                  </>
+                )}
+                onPress={() => {
+                  props.navigation.navigate(item.to);
+                  setSelected(item);
+                }}
               />
-            )}
-            label="Home"
-            onPress={() => {
-              props.navigation.navigate("HomeScreen");
-            }}
-          />
-          <DrawerItem
-            icon={({ color, size }) => (
-              <Icon
-                name="analytics-sharp"
-                type="ionicon"
-                color={color}
-                size={size}
-              />
-            )}
-            label="Your trips"
-            onPress={() => {
-              props.navigation.navigate("Trips");
-            }}
-          />
-          <DrawerItem
-            icon={({ color, size }) => (
-              <Icon
-                name="wallet-sharp"
-                type="ionicon"
-                color={color}
-                size={size}
-              />
-            )}
-            label={() => (
-              <>
-                <Text style={tw`text-sm text-gray-600`}>Wallet</Text>
-                <Text style={tw`text-xs font-light`}>Cash</Text>
-              </>
-            )}
-            onPress={() => {
-              props.navigation.navigate("Wallet");
-            }}
-          />
-          <DrawerItem
-            icon={({ color, size }) => (
-              <Icon
-                name="help-sharp"
-                type="ionicon"
-                color={color}
-                size={size}
-              />
-            )}
-            label="Help"
-            onPress={() => {
-              props.navigation.navigate("Help");
-            }}
-          />
-          <DrawerItem
-            icon={({ color, size }) => (
-              <Icon
-                name="gift-sharp"
-                type="ionicon"
-                color={color}
-                size={size}
-              />
-            )}
-            label="Send a Gift"
-            onPress={() => {
-              props.navigation.navigate("Gift");
-            }}
-          />
-          <DrawerItem
-            icon={({ color, size }) => (
-              <Icon name="cog-sharp" type="ionicon" color={color} size={size} />
-            )}
-            label="Settings"
-            onPress={() => {
-              props.navigation.navigate("Settings");
-            }}
-          />
+            ))}
         </Drawer.Section>
         <Drawer.Section title="Preferences">
           <TouchableRipple onPress={() => dispatch(setTheme(!selectedTheme))}>
@@ -210,7 +198,7 @@ const styles = StyleSheet.create({
     lineHeight: 14,
   },
   drawerSection: {
-    marginTop: 15,
+    // marginTop: 15,
   },
   bottomDrawerSection: {
     marginBottom: 15,
