@@ -10,7 +10,7 @@ import tw from "tailwind-react-native-classnames";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_MAPS_APIKEY } from "@env";
 import { useDispatch } from "react-redux";
-import { Icon } from "react-native-elements";
+import { Icon, withBadge } from "react-native-elements";
 
 import NavOptions from "../components/NavOptions";
 import { setDesination, setOrigin } from "../slices/navSlice";
@@ -26,6 +26,8 @@ const HomeScreen = () => {
     navigation.openDrawer();
   };
 
+  const BadgedIcon = withBadge()(Icon);
+
   return (
     <SafeAreaView style={tw`bg-white h-full`}>
       <View style={tw`p-5`}>
@@ -33,14 +35,8 @@ const HomeScreen = () => {
           style={tw`z-50 p-3 absolute left-4`}
           onPress={handleMenu}
         >
-          <Icon name="menu" />
+          <BadgedIcon name="menu" left={4} />
         </TouchableOpacity>
-        {/* <Image
-          style={{ width: 100, height: 80, resizeMode: "contain" }}
-          source={{
-            uri: "https://links.papareact.com/gzs",
-          }}
-        /> */}
         <HeroCard />
         <GooglePlacesAutocomplete
           styles={{

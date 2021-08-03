@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, SafeAreaView } from "react-native";
+import { View, StyleSheet } from "react-native";
 import {
   Avatar,
   Title,
@@ -13,7 +13,7 @@ import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import tw from "tailwind-react-native-classnames";
 
 import { Icon } from "react-native-elements";
-import { setTheme, getTheme } from "../slices/userSlice";
+import { setTheme, getTheme, getUserDetails } from "../slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const drawerItems = [
@@ -53,6 +53,7 @@ const drawerItems = [
 export function DrawerContent(props) {
   const dispatch = useDispatch();
   const selectedTheme = useSelector(getTheme);
+  const userInfo = useSelector(getUserDetails);
   const [selected, setSelected] = React.useState(null);
 
   return (
@@ -63,7 +64,7 @@ export function DrawerContent(props) {
         >
           <Avatar.Image
             source={{
-              uri: "https://mpng.subpng.com/20180802/su/kisspng-rowan-atkinson-mr-bean-s-holiday-film-720p-index-of-wp-content-uploads-2013-11-5b62ec2c17a857.0940305515332096440969.jpg",
+              uri: userInfo?.image,
             }}
             size={50}
           />
@@ -74,7 +75,7 @@ export function DrawerContent(props) {
                 props.navigation.navigate("EditAccount");
               }}
             >
-              Krishna Kanth
+              {userInfo?.name}
             </Title>
             <Caption style={tw`text-white text-xs font-normal`}>
               5.00
@@ -95,13 +96,22 @@ export function DrawerContent(props) {
         ]}
         title={
           <Text style={tw`text-white text-xs font-extralight`}>
-            Do more with your account{" "}
+            Do more with your account
           </Text>
         }
       >
         <TouchableRipple onPress={() => {}}>
           <View style={styles.preference}>
-            <Text style={tw`text-white`}>Messages</Text>
+            <Text style={tw`text-white`}>
+              Messages
+              <Icon
+                name="ellipse"
+                type="ionicon"
+                size={10}
+                color="blue"
+                style={tw`ml-2 pt-3`}
+              />
+            </Text>
             <View pointerEvents="none">
               <Icon
                 name="chevron-forward-sharp"
@@ -119,13 +129,13 @@ export function DrawerContent(props) {
             props.navigation.navigate("Home");
           }}
         />
-        <DrawerItem
+        {/* <DrawerItem
           labelStyle={{ color: "#ffff" }}
           label="Make money driving"
           onPress={() => {
             props.navigation.navigate("Home");
           }}
-        />
+        /> */}
       </Drawer.Section>
       <DrawerContentScrollView
         {...props}
@@ -135,7 +145,7 @@ export function DrawerContent(props) {
           {drawerItems &&
             drawerItems.map((item) => (
               <DrawerItem
-                style={tw`${item.id === selected?.id && "bg-gray-200"}`}
+                style={tw`${item.id === selected?.id && "bg-blue-100"}`}
                 key={item?.id}
                 icon={({ color, size }) => (
                   <Icon

@@ -16,7 +16,7 @@ const MapScreen = () => {
     <View>
       <TouchableOpacity
         onPress={() => navigation.navigate("HomeScreen")}
-        style={tw`bg-gray-100 z-50 p-3 rounded-full shadow-lg absolute top-16 left-8`}
+        style={tw`bg-gray-100 z-50 p-3 rounded-full shadow-lg absolute top-16 left-4`}
       >
         <Icon name="arrow-back-outline" type="ionicon" />
       </TouchableOpacity>

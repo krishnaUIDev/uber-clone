@@ -77,11 +77,11 @@ const RideOptionsCard = () => {
       <View>
         <TouchableOpacity
           onPress={() => navigation.navigate("NavigateCard")}
-          style={tw`absolute top-3 left-5 p-3 z-50 rounded-full`}
+          style={tw`absolute left-2 p-3 z-50 rounded-full`}
         >
           <Icon name="chevron-left" type="fontawesome" />
         </TouchableOpacity>
-        <Text style={tw`text-center py-5 text-xl`}>
+        <Text style={tw`text-center py-2 text-lg`}>
           Select a Ride - {travelTimeInfo?.distance?.text}
         </Text>
       </View>
@@ -112,7 +112,7 @@ const RideOptionsCard = () => {
             />
             <View style={tw`-ml-6`}>
               <View style={tw`flex flex-row items-center`}>
-                <Text style={tw`text-xl font-semibold`}>{title}</Text>
+                <Text style={tw`text-lg font-semibold`}>{title}</Text>
                 {id === selected?.id && (
                   <>
                     <Icon
@@ -125,9 +125,8 @@ const RideOptionsCard = () => {
                   </>
                 )}
               </View>
-
               <Text style={tw`flex flex-wrap`}>
-                {travelTimeInfo?.duration?.text} Travel Time
+                {travelTimeInfo?.duration?.text} drop off
               </Text>
             </View>
             <Text style={tw`text-xl`}>
