@@ -1,14 +1,14 @@
 import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DrawerContent } from "./DrawerContent";
-import Home from "../screens/Home";
-import Trips from "../screens/Trips";
-import Gift from "../screens/Gift";
-import Help from "../screens/Help";
-import Profile from "../screens/Profile";
-import Wallet from "../screens/Wallet";
-import Settings from "../screens/Settings";
-import EditAccount from "../screens/Profile/EditAccount";
+import Home from "../Screens/Home";
+import Trips from "../Screens/Trips";
+import Gift from "../Screens/Gift";
+import Help from "../Screens/Help";
+import Profile from "../Screens/Profile";
+import Wallet from "../Screens/Wallet";
+import Settings from "../Screens/Settings";
+import EditAccount from "../Screens/Profile/EditAccount";
 
 const DrawerRoutes = () => {
   const Drawer = createDrawerNavigator();
