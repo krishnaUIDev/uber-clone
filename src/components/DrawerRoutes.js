@@ -14,7 +14,11 @@ const DrawerRoutes = () => {
   const Drawer = createDrawerNavigator();
   return (
     <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-      <Drawer.Screen name="HomeDrawer" component={Home} />
+      <Drawer.Screen
+        name="HomeDrawer"
+        component={Home}
+        initialRouteName="Home"
+      />
       <Drawer.Screen name="Trips" component={Trips} />
       <Drawer.Screen name="Gift" component={Gift} />
       <Drawer.Screen name="Help" component={Help} />
