@@ -129,13 +129,6 @@ export function DrawerContent(props) {
             props.navigation.navigate("Home");
           }}
         />
-        {/* <DrawerItem
-          labelStyle={{ color: "#ffff" }}
-          label="Make money driving"
-          onPress={() => {
-            props.navigation.navigate("Home");
-          }}
-        /> */}
       </Drawer.Section>
       <DrawerContentScrollView
         {...props}
@@ -196,6 +189,7 @@ export function DrawerContent(props) {
             />
           )}
           label="Sign Out"
+          onPress={() => props.navigation.navigate("login")}
         />
       </Drawer.Section>
     </View>

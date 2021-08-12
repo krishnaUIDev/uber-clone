@@ -8,6 +8,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import DrawerRoutes from "./src/components/DrawerRoutes";
 import Login from "./src/Screens/Auth/Login";
 import Signup from "./src/Screens/Auth/Signup";
+import OnBoardingScreen from "./src/Screens/OnBoardingScreens";
 
 export default function App() {
   return (
@@ -21,6 +22,7 @@ export default function App() {
           >
             {/* <Signup /> */}
             <DrawerRoutes />
+            {/* <OnBoardingScreen /> */}
           </KeyboardAvoidingView>
         </SafeAreaProvider>
       </NavigationContainer>

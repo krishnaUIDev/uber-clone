@@ -51,6 +51,7 @@ const Signup = () => {
               textAlign: "center",
               marginBottom: 15,
             }}
+            type="number"
             placeholder="Phone Number"
           />
           <View style={tw`items-center`}>
