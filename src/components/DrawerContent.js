@@ -189,7 +189,7 @@ export function DrawerContent(props) {
             />
           )}
           label="Sign Out"
-          onPress={() => props.navigation.navigate("login")}
+          onPress={() => props.navigation.navigate("Auth")}
         />
       </Drawer.Section>
     </View>

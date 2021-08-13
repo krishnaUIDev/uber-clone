@@ -1,4 +1,3 @@
-import { Alert, StatusBar, Image, SafeAreaView, View } from "react-native";
 import React from "react";
 import tw from "tailwind-react-native-classnames";
 import { useNavigation } from "@react-navigation/native";
@@ -14,7 +13,7 @@ const OnBoarding = () => {
   return (
     <Onboarding
       showDone={false}
-      onSkip={() => navigation.navigate("signup")}
+      onSkip={() => navigation.navigate("Auth")}
       pages={[
         {
           title: "Hey!",
@@ -41,7 +40,7 @@ const OnBoarding = () => {
                 width: 140,
                 borderRadius: 20,
               }}
-              onPress={() => navigation.navigate("signup")}
+              onPress={() => navigation.navigate("Auth")}
             />
           ),
           backgroundColor: "#fff",

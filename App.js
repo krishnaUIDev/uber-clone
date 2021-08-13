@@ -9,6 +9,7 @@ import DrawerRoutes from "./src/components/DrawerRoutes";
 import Login from "./src/Screens/Auth/Login";
 import Signup from "./src/Screens/Auth/Signup";
 import OnBoardingScreen from "./src/Screens/OnBoardingScreens";
+import StackRoutes from "./StackRoutes";
 
 export default function App() {
   return (
@@ -21,8 +22,9 @@ export default function App() {
             style={{ flex: 1 }}
           >
             {/* <Signup /> */}
-            <DrawerRoutes />
+            {/* <DrawerRoutes /> */}
             {/* <OnBoardingScreen /> */}
+            <StackRoutes />
           </KeyboardAvoidingView>
         </SafeAreaProvider>
       </NavigationContainer>

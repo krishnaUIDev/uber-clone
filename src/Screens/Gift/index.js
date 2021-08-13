@@ -1,14 +1,15 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Construction from "../Construction";
 
-const Gift = () => {
+export default function Gift() {
   return (
     <View>
-      <Text>Gift</Text>
+      <View>
+        <Construction />
+      </View>
     </View>
   );
-};
-
-export default Gift;
+}
 
 const styles = StyleSheet.create({});

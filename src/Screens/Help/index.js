@@ -1,14 +1,15 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Construction from "../Construction";
 
-const Help = () => {
+export default function Help() {
   return (
     <View>
-      <Text>Help</Text>
+      <View>
+        <Construction />
+      </View>
     </View>
   );
-};
-
-export default Help;
+}
 
 const styles = StyleSheet.create({});

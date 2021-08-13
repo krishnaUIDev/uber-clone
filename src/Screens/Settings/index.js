@@ -1,14 +1,15 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Construction from "../Construction";
 
-const Settings = () => {
+export default function Settings() {
   return (
     <View>
-      <Text>Settings</Text>
+      <View>
+        <Construction />
+      </View>
     </View>
   );
-};
-
-export default Settings;
+}
 
 const styles = StyleSheet.create({});

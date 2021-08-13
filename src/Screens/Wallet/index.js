@@ -1,14 +1,15 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import Construction from "../Construction";
 
-const Wallet = () => {
+export default function Wallet() {
   return (
     <View>
-      <Text>Wallet</Text>
+      <View>
+        <Construction />
+      </View>
     </View>
   );
-};
-
-export default Wallet;
+}
 
 const styles = StyleSheet.create({});

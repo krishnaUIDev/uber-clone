@@ -9,27 +9,17 @@ import Profile from "../Screens/Profile";
 import Wallet from "../Screens/Wallet";
 import Settings from "../Screens/Settings";
 import EditAccount from "../Screens/Profile/EditAccount";
-import OnBoardingScreens from "../Screens/OnBoardingScreens";
-import Signup from "../Screens/Auth/Signup";
-import Login from "../Screens/Auth/Login";
-import ForgotPass from "../Screens/Auth/ForgotPass";
 
 const DrawerRoutes = () => {
   const Drawer = createDrawerNavigator();
   return (
     <Drawer.Navigator drawerContent={(props) => <DrawerContent {...props} />}>
-      <Drawer.Screen
-        name="onBoarding"
-        component={OnBoardingScreens}
-        initialRouteName="onBoarding"
-      />
-      {/* Auth */}
-      <Drawer.Screen name="signup" component={Signup} />
-      <Drawer.Screen name="login" component={Login} />
-      <Drawer.Screen name="forgot" component={ForgotPass} />
-
       {/* SideBar */}
-      <Drawer.Screen name="HomeScreen" component={Home} />
+      <Drawer.Screen
+        name="HomeScreen"
+        component={Home}
+        initialRouteName="HomeScreen"
+      />
       <Drawer.Screen name="Trips" component={Trips} />
       <Drawer.Screen name="Gift" component={Gift} />
       <Drawer.Screen name="Help" component={Help} />

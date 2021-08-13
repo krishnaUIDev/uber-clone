@@ -22,7 +22,7 @@ const list = [
   },
 ];
 
-const EditAccount = () => {
+const EditAccount = ({ navigation }) => {
   const userDetails = useSelector(getUserDetails);
   return (
     <SafeAreaView style={tw`bg-white h-full`}>
@@ -55,7 +55,12 @@ const EditAccount = () => {
             </ListItem>
           ))}
         </View>
-        <Button style={tw`px-6`} title="Logout" type="outline" />
+        <Button
+          style={tw`px-6`}
+          title="Logout"
+          type="outline"
+          onPress={() => navigation.navigate("Auth")}
+        />
       </View>
     </SafeAreaView>
   );

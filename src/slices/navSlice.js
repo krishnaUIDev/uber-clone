@@ -23,7 +23,7 @@ export const navSlice = createSlice({
     setNearBy: (state, action) => {
       const near = action.payload.results.map((item) => item.geometry.location);
       const filterRes = near.slice(6, near.length);
-      const updated = filterRes.map((v, id) => ({ ...v, id, type: "UberX" }));
+      const updated = near.map((v, id) => ({ ...v, id, type: "UberX" }));
       state.nearBy = updated;
     },
   },
