@@ -17,7 +17,7 @@ const MapScreen = () => {
   const Stack = createStackNavigator();
   const navigation = useNavigation();
   const windowHeight = useSelector(getMapScreenHeighit);
-  console.log(windowHeight);
+
   return (
     <View>
       <TouchableOpacity

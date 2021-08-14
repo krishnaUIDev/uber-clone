@@ -31,6 +31,7 @@ const NavOptions = () => {
     navigation.navigate(item.screen);
     dispatch(setDesination(null));
   };
+
   return (
     <FlatList
       data={data}
@@ -38,7 +39,7 @@ const NavOptions = () => {
       horizontal
       renderItem={({ item }) => (
         <TouchableOpacity
-          style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-200 mr-2 w-40`}
+          style={tw`p-2 px-4 bg-gray-200 mr-2 w-40`}
           onPress={() => handleChange(item)}
           disabled={!origin}
         >

@@ -1,52 +1,33 @@
 import React from "react";
-import {
-  StyleSheet,
-  View,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_MAPS_APIKEY } from "@env";
 import { useDispatch } from "react-redux";
-import { Icon, withBadge } from "react-native-elements";
 
 import NavOptions from "../components/NavOptions";
 import { setDesination, setOrigin } from "../slices/navSlice";
 import NavFavourites from "../components/NavFavourites";
 import HeroCard from "../components/HeroCard";
-import { useNavigation } from "@react-navigation/native";
+import Header from "./Header";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
-
-  const handleMenu = () => {
-    navigation.openDrawer();
-  };
-
-  const BadgedIcon = withBadge()(Icon);
-
   return (
-    <SafeAreaView style={tw`bg-white h-full`}>
-      <View style={tw`p-5`}>
-        <TouchableOpacity
-          style={tw`z-50 p-3 absolute left-4`}
-          onPress={handleMenu}
-        >
-          <BadgedIcon name="menu" left={4} />
-        </TouchableOpacity>
-        <HeroCard />
+    <View style={tw`bg-white`}>
+      <Header />
+      <View style={tw`p-4`}>
         <GooglePlacesAutocomplete
           styles={{
             container: {
               flex: 0,
             },
             textInput: {
-              backgroundColor: "#DDDDDF",
-              borderRadius: 0,
+              backgroundColor: "#eeeeee",
+              borderRadius: 4,
               fontSize: 16,
+              height: 60,
+              fontWeight: "bold",
             },
           }}
           enablePoweredByContainer={false}
@@ -73,7 +54,7 @@ const HomeScreen = () => {
         <NavOptions />
         <NavFavourites />
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
