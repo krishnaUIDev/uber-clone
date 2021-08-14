@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -13,7 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 import { Icon } from "react-native-elements";
 
 import { GOOGLE_MAPS_APIKEY } from "@env";
-import { setDesination, selectDesination } from "../slices/navSlice";
+import { setDesination, selectDesination, setMapScreen } from "../slices/navSlice";
 import NavFavourites from "./NavFavourites";
 
 const hour = new Date().getHours();
@@ -21,10 +21,19 @@ const Time =
   "Good " +
   ((hour < 12 && "Morning") || (hour < 18 && "Afternoon") || "Evening");
 
+  
+
 const NavigateCard = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
   const destination = useSelector(selectDesination);
+
+  useEffect(() => {
+    dispatch(
+      setMapScreen({ mapScreenHeight: "h-1/2", navigationHeight: "h-1/2" })
+    );
+  }, []);
+
   return (
     <SafeAreaView style={tw`bg-white flex-1`}>
       <Text style={tw`text-center py-3 text-lg`}>{Time}, Krishna</Text>

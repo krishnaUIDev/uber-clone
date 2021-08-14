@@ -5,6 +5,8 @@ const initialState = {
   desination: null,
   travelTimeInformation: null,
   nearBy: null,
+  mapScreenHeight: null,
+  selectedCar: null,
 };
 
 export const navSlice = createSlice({
@@ -26,15 +28,29 @@ export const navSlice = createSlice({
       const updated = near.map((v, id) => ({ ...v, id, type: "UberX" }));
       state.nearBy = updated;
     },
+    setMapScreen: (state, action) => {
+      state.mapScreenHeight = action.payload;
+    },
+    setSelectedCar: (state, action) => {
+      state.selectedCar = action.payload;
+    },
   },
 });
 
-export const { setOrigin, setNearBy, setDesination, setTravelTimeInformation } =
-  navSlice.actions;
+export const {
+  setOrigin,
+  setNearBy,
+  setDesination,
+  setTravelTimeInformation,
+  setMapScreen,
+  setSelectedCar,
+} = navSlice.actions;
 
 export const selectOrigin = (state) => state.nav.origin;
 export const selectDesination = (state) => state.nav.desination;
 export const selectTravelInfo = (state) => state.nav.travelTimeInformation;
 export const getNearBy = (state) => state.nav.nearBy;
+export const getMapScreenHeighit = (state) => state.nav.mapScreenHeight;
+export const getSelectedCar = (state) => state.nav.selectedCar;
 
 export default navSlice.reducer;

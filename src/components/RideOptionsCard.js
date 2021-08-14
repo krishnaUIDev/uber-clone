@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,9 +11,13 @@ import {
 import { Icon } from "react-native-elements";
 import tw from "tailwind-react-native-classnames";
 import { useNavigation } from "@react-navigation/native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
-import { selectTravelInfo } from "../slices/navSlice";
+import {
+  selectTravelInfo,
+  setMapScreen,
+  setSelectedCar,
+} from "../slices/navSlice";
 
 const data = [
   {
@@ -70,8 +74,21 @@ const SURGE_CHARGE_RATE = 1.5;
 
 const RideOptionsCard = () => {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const [selected, setSelected] = useState(null);
   const travelTimeInfo = useSelector(selectTravelInfo);
+
+  useEffect(() => {
+    dispatch(
+      setMapScreen({ mapScreenHeight: "h-1/2", navigationHeight: "h-1/2" })
+    );
+  }, []);
+
+  const handleChange = () => {
+    dispatch(setSelectedCar(selected));
+    navigation.navigate("FindingTaxi");
+  };
+
   return (
     <SafeAreaView style={tw`bg-white flex-grow`}>
       <View>
@@ -147,6 +164,7 @@ const RideOptionsCard = () => {
         <TouchableOpacity
           style={tw`bg-black py-3 m-3 ${!selected && "bg-gray-300"}`}
           disabled={!selected}
+          onPress={handleChange}
         >
           <Text style={tw`text-center text-white text-xl `}>
             Choose {selected?.title}
