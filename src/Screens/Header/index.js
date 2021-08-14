@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
+import { View, Image, TouchableOpacity, Text } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { Header } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
@@ -58,30 +58,30 @@ const index = () => {
           >
             {data?.subTitle}
           </Text>
-          <TouchableOpacity
-            // onPress={() => navigation.navigate("RideOptionsCard")}
-            style={tw`bg-black w-${data?.buttonWidth} items-center px-2 py-2 mt-4 justify-center rounded-full`}
-          >
-            <Text style={tw`text-white text-sm text-center`}>
-              {data?.buttonContent}
-            </Text>
-          </TouchableOpacity>
-          <Image
-            style={[
-              tw``,
-              {
-                marginLeft: "auto",
-                marginRight: 0,
-                width: 65,
-                height: 65,
-                resizeMode: "contain",
-                transform: [{ rotate: "-65deg" }],
-              },
-            ]}
-            source={{
-              uri: data?.image,
-            }}
-          />
+          <View style={tw`flex-row justify-between items-center`}>
+            <TouchableOpacity
+              // onPress={() => navigation.navigate("RideOptionsCard")}
+              style={tw`bg-black w-${data?.buttonWidth} items-center px-2 py-2 mt-4 justify-center rounded-full`}
+            >
+              <Text style={tw`text-white text-sm text-center`}>
+                {data?.buttonContent}
+              </Text>
+            </TouchableOpacity>
+            <Image
+              style={[
+                tw``,
+                {
+                  width: 65,
+                  height: 65,
+                  resizeMode: "contain",
+                  transform: [{ rotate: "-65deg" }],
+                },
+              ]}
+              source={{
+                uri: data?.image,
+              }}
+            />
+          </View>
         </View>
       </View>
     </View>
