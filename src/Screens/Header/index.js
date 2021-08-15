@@ -74,7 +74,7 @@ const index = () => {
                   width: 65,
                   height: 65,
                   resizeMode: "contain",
-                  transform: [{ rotate: "-65deg" }],
+                  // transform: [{ rotate: "-65deg" }],
                 },
               ]}
               source={{

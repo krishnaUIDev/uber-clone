@@ -72,7 +72,7 @@ export function DrawerContent(props) {
             <Title
               style={tw`text-white text-base font-semibold `}
               onPress={() => {
-                props.navigation.navigate("EditAccount");
+                props.navigation.navigate("ProfileAccount");
               }}
             >
               {userInfo?.name}
@@ -134,7 +134,7 @@ export function DrawerContent(props) {
         {...props}
         contentContainerStyle={{ paddingTop: 0 }}
       >
-        <Drawer.Section style={styles.drawerSection}>
+        <Drawer.Section>
           {drawerItems &&
             drawerItems.map((item) => (
               <DrawerItem
@@ -200,9 +200,6 @@ const styles = StyleSheet.create({
   caption: {
     fontSize: 14,
     lineHeight: 14,
-  },
-  drawerSection: {
-    // marginTop: 15,
   },
   bottomDrawerSection: {
     marginBottom: 15,

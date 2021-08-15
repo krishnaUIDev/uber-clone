@@ -1,55 +1,75 @@
-import React from "react";
+import React, { useRef, useCallback, useMemo } from "react";
 import { useSelector } from "react-redux";
-import { StyleSheet, Text, SafeAreaView, View } from "react-native";
-import { Avatar } from "react-native-elements";
-import { createStackNavigator } from "@react-navigation/stack";
+import {
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  View,
+  ImageBackground,
+  TouchableOpacity,
+} from "react-native";
 import tw from "tailwind-react-native-classnames";
+import { Icon } from "react-native-elements";
+import BottomSheet from "@gorhom/bottom-sheet";
 
 import { getUserDetails } from "../../slices/userSlice";
-import AccountDetails from "./AccountDetails";
-import ProfileList from "./ProfileList";
-import ProfileSettings from "./ProfileSettings";
 
-const Stack = createStackNavigator();
+const EditAccount = () => {
+  const bsRef = useRef(null);
 
-const EditAccount = ({ navigation }) => {
+  // variables
+  const snapPoints = useMemo(() => ["40%", "30%"], []);
+
+  // callbacks
+  const handleSheetChanges = useCallback((index) => {
+    console.log("handleSheetChanges", index);
+  }, []);
+
   const userDetails = useSelector(getUserDetails);
+
   return (
-    <SafeAreaView style={tw`bg-white`}>
+    <SafeAreaView style={tw`bg-white flex-1`}>
+      <BottomSheet
+        ref={bsRef}
+        index={1}
+        snapPoints={snapPoints}
+        onChange={handleSheetChanges}
+      >
+        <View>
+          <Text>Awesome 🎉</Text>
+        </View>
+      </BottomSheet>
       <View style={tw``}>
-        <View style={tw`items-center p-6 h-2/5`}>
-          <Text style={tw`text-xl font-semibold pb-6`}>My Profile</Text>
+        <View style={tw`items-center p-6 h-1/3`}>
           <View>
-            <Avatar
-              size="xlarge"
-              rounded
-              source={{
-                uri: userDetails?.image,
-              }}
-            />
+            <TouchableOpacity
+              onPress={() => bottomSheetRef.current.snapPoints(0)}
+            >
+              <View>
+                <ImageBackground
+                  source={{ uri: userDetails?.image }}
+                  style={tw`h-32 w-32 opacity-70`}
+                  imageStyle={{ borderRadius: 100 }}
+                >
+                  <View style={tw`flex-1 justify-end items-end`}>
+                    <Icon
+                      name="camera-sharp"
+                      type="ionicon"
+                      size={26}
+                      color="#fff"
+                      style={tw`opacity-100 justify-center items-center border border-white bg-gray-500 rounded-full`}
+                    />
+                  </View>
+                </ImageBackground>
+              </View>
+            </TouchableOpacity>
           </View>
           <Text style={tw`text-lg font-medium italic`}>
             {userDetails?.name}
           </Text>
         </View>
         <View style={tw`h-3/5`}>
-          <Stack.Navigator initialRouteName="profileList">
-            <Stack.Screen
-              name="profileList"
-              component={ProfileList}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="accountDetails"
-              component={AccountDetails}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="profileSettings"
-              component={ProfileSettings}
-              options={{ headerShown: false }}
-            />
-          </Stack.Navigator>
+          <Text></Text>
         </View>
       </View>
     </SafeAreaView>

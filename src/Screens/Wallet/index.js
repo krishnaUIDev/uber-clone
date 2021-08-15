@@ -14,7 +14,7 @@ export default function Wallet() {
     <SafeAreaView style={tw`bg-white h-full`}>
       <View style={tw`p-8 px-4`}>
         <Text style={tw`text-2xl font-bold self-center`}>Wallet</Text>
-        <View
+        <TouchableOpacity
           style={[tw`flex-row justify-between items-center mt-4`, styles.card]}
         >
           <View>
@@ -35,8 +35,9 @@ export default function Wallet() {
           <View>
             <Icon name="chevron-forward-sharp" type="ionicon" size={40} />
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
+      {/* </View> */}
     </SafeAreaView>
   );
 }

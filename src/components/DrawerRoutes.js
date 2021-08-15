@@ -8,7 +8,7 @@ import Help from "../Screens/Help";
 import Profile from "../Screens/Profile";
 import Wallet from "../Screens/Wallet";
 import Settings from "../Screens/Settings";
-import EditAccount from "../Screens/Profile/EditAccount";
+import ProfileAccount from "../Screens/Profile/ProfileAccount";
 
 const DrawerRoutes = () => {
   const Drawer = createDrawerNavigator();
@@ -26,7 +26,7 @@ const DrawerRoutes = () => {
       <Drawer.Screen name="Profile" component={Profile} />
       <Drawer.Screen name="Wallet" component={Wallet} />
       <Drawer.Screen name="Settings" component={Settings} />
-      <Drawer.Screen name="EditAccount" component={EditAccount} />
+      <Drawer.Screen name="ProfileAccount" component={ProfileAccount} />
     </Drawer.Navigator>
   );
 };

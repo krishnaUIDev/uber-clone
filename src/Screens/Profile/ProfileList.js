@@ -5,22 +5,35 @@ import { Icon, ListItem, Button } from "react-native-elements";
 
 const list = [
   {
-    title: "Account Details",
-    icon: "person-circle-outline",
-    color: "#28B7FC",
+    title: "Your Favorites",
+    icon: "heart-circle-sharp",
+    color: "#FF6347",
     to: "accountDetails",
   },
   {
-    title: "Settings",
-    icon: "settings-outline",
+    title: "Payment",
+    icon: "card-sharp",
+    color: "#FF6347",
+    to: "accountDetails",
+  },
+  {
+    title: "Tell Your Friends",
+    icon: "share-social-sharp",
+    color: "#FF6347",
     to: "profileSettings",
+  },
+  {
+    title: "Support",
+    icon: "help-buoy-sharp",
+    color: "#FF6347",
+    to: "accountDetails",
   },
 ];
 
 const ProfileList = ({ navigation }) => {
   return (
     <View style={tw`flex-1 bg-white`}>
-      <View style={tw`px-2`}>
+      <View style={tw`mt-2`}>
         {list.map((item, i) => (
           <ListItem key={i} onPress={() => navigation.navigate(item.to)}>
             <Icon name={item.icon} type="ionicon" color={item?.color} />
@@ -33,12 +46,12 @@ const ProfileList = ({ navigation }) => {
           </ListItem>
         ))}
       </View>
-      <Button
+      {/* <Button
         style={tw`px-6`}
         title="Logout"
         type="outline"
         onPress={() => navigation.navigate("Auth")}
-      />
+      /> */}
     </View>
   );
 };
