@@ -1,4 +1,4 @@
-import React, { useState, createRef } from "react";
+import React, { useState, createRef, useEffect } from "react";
 import {
   StyleSheet,
   TextInput,
@@ -10,8 +10,13 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
 } from "react-native";
+import firebase from "firebase";
 import LoginSvg from "./LoginSvg";
 import { useNavigation } from "@react-navigation/native";
+
+// firebase.auth().onAuthStateChanged((user) => {
+//   if(!user){}
+// });
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -19,11 +24,34 @@ const LoginScreen = () => {
   const [userEmail, setUserEmail] = useState("");
   const [userPassword, setUserPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [errortext, setErrortext] = useState("");
+  const [errortext, setErrortext] = useState({});
 
   const passwordInputRef = createRef();
 
-  const handleSubmitPress = () => navigation.navigate("DrawerNavigationRoutes");
+  useEffect(() => {
+    setUserEmail("");
+    setUserPassword("");
+    setErrortext({});
+  }, []);
+
+  const handleSubmitPress = () => {
+    if (userEmail === "" && userPassword === "") {
+      setErrortext({
+        emailError: "Please enter email",
+        passWordError: "Please enter password",
+      });
+    }
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(userEmail, userPassword)
+      .then((result) => {
+        console.log(result);
+        navigation.navigate("DrawerNavigationRoutes");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <View style={styles.mainBody}>
@@ -71,8 +99,8 @@ const LoginScreen = () => {
                 returnKeyType="next"
               />
             </View>
-            {errortext != "" ? (
-              <Text style={styles.errorTextStyle}>{errortext}</Text>
+            {errortext ? (
+              <Text style={styles.errorTextStyle}>{errortext?.emailError}</Text>
             ) : null}
             <TouchableOpacity
               style={styles.buttonStyle}

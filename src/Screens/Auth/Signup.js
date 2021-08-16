@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -8,12 +8,37 @@ import {
   KeyboardAvoidingView,
   ScrollView,
 } from "react-native";
+import firebase from "firebase";
 import { Avatar, Button } from "react-native-elements";
 import tw from "tailwind-react-native-classnames";
 import { useNavigation } from "@react-navigation/native";
 
 const Signup = () => {
   const navigation = useNavigation();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+
+  const onSignUp = () => {
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, pass)
+      .then((result) => {
+        firebase
+          .firestore()
+          .collection("users")
+          .doc(firebase.auth().currentUser.uid)
+          .set({
+            name,
+            email,
+          });
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <SafeAreaView style={tw`bg-white h-full`}>
       <ScrollView
@@ -46,6 +71,7 @@ const Signup = () => {
                   marginBottom: 15,
                 }}
                 placeholder="First Name"
+                onChangeText={(name) => setName(name)}
               />
               <TextInput
                 style={{
@@ -56,7 +82,8 @@ const Signup = () => {
                   textAlign: "center",
                   marginBottom: 15,
                 }}
-                placeholder="Last Name"
+                placeholder="Email"
+                onChangeText={(name) => setEmail(name)}
               />
               <TextInput
                 style={{
@@ -67,18 +94,19 @@ const Signup = () => {
                   textAlign: "center",
                   marginBottom: 15,
                 }}
-                type="number"
-                placeholder="Phone Number"
+                placeholder="Password"
+                onChangeText={(name) => setPass(name)}
               />
               <View style={tw`items-center`}>
                 <Button
-                  title="Send Code"
+                  title="Signup"
                   color="white"
                   buttonStyle={{
                     backgroundColor: "#57534E",
                     width: 240,
                     borderRadius: 20,
                   }}
+                  onPress={onSignUp}
                 />
                 <Text style={tw`text-base p-4 font-extralight text-opacity-30`}>
                   {/* OR */}
