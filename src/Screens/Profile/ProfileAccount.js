@@ -1,19 +1,15 @@
 import React from "react";
 import { View, SafeAreaView, StyleSheet } from "react-native";
-import {
-  Avatar,
-  Title,
-  Caption,
-  Text,
-  TouchableRipple,
-} from "react-native-paper";
+import { Avatar, Title, Caption, Text } from "react-native-paper";
 import { createStackNavigator } from "@react-navigation/stack";
 import tw from "tailwind-react-native-classnames";
 import { useNavigation } from "@react-navigation/native";
-
+import { useSelector } from "react-redux";
 import { Icon } from "react-native-elements";
 import EditAccount from "./EditAccount";
 import ProfileList from "./ProfileList";
+import { getUserDetails } from "../../slices/userSlice";
+import { StatusBar } from "expo-status-bar";
 
 const Profile = createStackNavigator();
 
@@ -70,6 +66,8 @@ const ProfileAccount = () => {
 export default ProfileAccount;
 
 const ProfileAccountDetails = () => {
+  const userDetails = useSelector(getUserDetails);
+
   //   const myCustomShare = async() => {
   //     const shareOptions = {
   //       message: 'Order your next meal from FoodFinder App. I\'ve already ordered more than 10 meals on it.',
@@ -87,17 +85,22 @@ const ProfileAccountDetails = () => {
 
   return (
     <SafeAreaView style={tw`bg-white flex-1`}>
+      {/* <StatusBar style="dark" /> */}
       <View style={styles.userInfoSection}>
         <View style={{ flexDirection: "row", marginTop: 15 }}>
           <Avatar.Image
             source={{
-              uri: "https://mpng.subpng.com/20180802/su/kisspng-rowan-atkinson-mr-bean-s-holiday-film-720p-index-of-wp-content-uploads-2013-11-5b62ec2c17a857.0940305515332096440969.jpg",
+              uri: userDetails?.image,
             }}
             size={80}
           />
           <View style={{ marginLeft: 20 }}>
-            <Title style={tw`text-2xl font-semibold mt-2`}>John Doe</Title>
-            <Caption style={tw`text-base font-medium`}>@j_doe</Caption>
+            <Title style={tw`text-2xl font-semibold mt-2`}>
+              {userDetails?.name}
+            </Title>
+            <Caption style={tw`text-base font-medium`}>
+              {userDetails?.email}
+            </Caption>
           </View>
         </View>
       </View>
@@ -110,15 +113,19 @@ const ProfileAccountDetails = () => {
             color="#777777"
             size={20}
           />
-          <Text style={tw`ml-4 text-gray-500`}>Kolkata, India</Text>
+          <Text style={tw`ml-4 text-gray-500`}>
+            {userDetails?.location || "--"}
+          </Text>
         </View>
         <View style={styles.row}>
           <Icon name="call-outline" type="ionicon" color="#777777" size={20} />
-          <Text style={tw`ml-4 text-gray-500`}>+91-900000009</Text>
+          <Text style={tw`ml-4 text-gray-500`}>
+            {userDetails?.phone || "--"}
+          </Text>
         </View>
         <View style={styles.row}>
           <Icon name="mail-outline" type="ionicon" color="#777777" size={20} />
-          <Text style={tw`ml-4 text-gray-500`}>john_doe@email.com</Text>
+          <Text style={tw`ml-4 text-gray-500`}>{userDetails?.email}</Text>
         </View>
       </View>
 

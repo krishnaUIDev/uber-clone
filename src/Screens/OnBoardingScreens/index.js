@@ -13,7 +13,7 @@ const OnBoarding = () => {
   return (
     <Onboarding
       showDone={false}
-      onSkip={() => navigation.navigate("Auth")}
+      onSkip={() => navigation.replace("Auth")}
       pages={[
         {
           title: "Hey!",
@@ -40,7 +40,7 @@ const OnBoarding = () => {
                 width: 140,
                 borderRadius: 20,
               }}
-              onPress={() => navigation.navigate("Auth")}
+              onPress={() => navigation.replace("Auth")}
             />
           ),
           backgroundColor: "#fff",

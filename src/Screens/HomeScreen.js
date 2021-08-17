@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
@@ -8,11 +8,25 @@ import { useDispatch } from "react-redux";
 import NavOptions from "../components/NavOptions";
 import { setDesination, setOrigin } from "../slices/navSlice";
 import NavFavourites from "../components/NavFavourites";
-import HeroCard from "../components/HeroCard";
 import Header from "./Header";
+import { auth } from "../firebase";
+import { setUser } from "../slices/userSlice";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(
+      setUser({
+        image: auth?.currentUser?.photoURL,
+        email: auth?.currentUser?.email,
+        name: auth?.currentUser?.displayName,
+        phone: auth?.currentUser?.phoneNumber,
+      })
+    );
+  }, []);
+
+  console.log(auth?.currentUser.photoURL, "--");
   return (
     <View style={tw`bg-white`}>
       <Header />

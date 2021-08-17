@@ -21,30 +21,12 @@ const Auth = () => {
       <Stack.Screen
         name="RegisterScreen"
         component={Signup}
-        options={{
-          title: "Register", //Set Header Title
-          headerStyle: {
-            backgroundColor: "#307ecc", //Set Header color
-          },
-          headerTintColor: "#fff", //Set Header text color
-          headerTitleStyle: {
-            fontWeight: "bold", //Set Header text style
-          },
-        }}
+        options={{ headerShown: false }}
       />
       <Stack.Screen
         name="ForgotScreen"
         component={ForgotPass}
-        options={{
-          title: "Forgot Pass", //Set Header Title
-          headerStyle: {
-            backgroundColor: "#307ecc", //Set Header color
-          },
-          headerTintColor: "#fff", //Set Header text color
-          headerTitleStyle: {
-            fontWeight: "bold", //Set Header text style
-          },
-        }}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

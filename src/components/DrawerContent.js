@@ -15,6 +15,8 @@ import tw from "tailwind-react-native-classnames";
 import { Icon } from "react-native-elements";
 import { setTheme, getTheme, getUserDetails } from "../slices/userSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { auth } from "../firebase";
+import { useNavigation } from "@react-navigation/native";
 
 const drawerItems = [
   {
@@ -51,10 +53,21 @@ const drawerItems = [
 ];
 
 export function DrawerContent(props) {
+  const navigation = useNavigation();
+
   const dispatch = useDispatch();
   const selectedTheme = useSelector(getTheme);
   const userInfo = useSelector(getUserDetails);
   const [selected, setSelected] = React.useState(null);
+
+  const signOut = () => {
+    auth
+      .signOut()
+      .then(() => {
+        navigation.replace("Auth");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -72,7 +85,7 @@ export function DrawerContent(props) {
             <Title
               style={tw`text-white text-base font-semibold `}
               onPress={() => {
-                props.navigation.navigate("ProfileAccount");
+                navigation.navigate("ProfileAccount");
               }}
             >
               {userInfo?.name}
@@ -126,7 +139,7 @@ export function DrawerContent(props) {
           label="Get food delivery"
           labelStyle={{ color: "#ffff" }}
           onPress={() => {
-            props.navigation.navigate("Home");
+            navigation.navigate("Home");
           }}
         />
       </Drawer.Section>
@@ -161,7 +174,7 @@ export function DrawerContent(props) {
                   </>
                 )}
                 onPress={() => {
-                  props.navigation.navigate(item.to);
+                  navigation.navigate(item.to);
                   setSelected(item);
                 }}
               />
@@ -189,7 +202,7 @@ export function DrawerContent(props) {
             />
           )}
           label="Sign Out"
-          onPress={() => props.navigation.navigate("Auth")}
+          onPress={signOut}
         />
       </Drawer.Section>
     </View>
