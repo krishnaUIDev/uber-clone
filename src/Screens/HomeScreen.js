@@ -26,7 +26,6 @@ const HomeScreen = () => {
     );
   }, []);
 
-  console.log(auth?.currentUser.photoURL, "--");
   return (
     <View style={tw`bg-white`}>
       <Header />
@@ -40,7 +39,7 @@ const HomeScreen = () => {
               backgroundColor: "#eeeeee",
               borderRadius: 4,
               fontSize: 16,
-              height: 60,
+              height: 50,
               fontWeight: "bold",
             },
           }}

@@ -26,7 +26,7 @@ const FindingTaxi = ({ navigation }) => {
     let timeout;
     if (navigation) {
       timeout = setTimeout(() => {
-        navigation.navigate("SharedRide");
+        navigation.replace("SharedRide");
       }, 6000);
     }
     return () => {

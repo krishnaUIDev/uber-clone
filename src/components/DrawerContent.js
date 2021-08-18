@@ -27,16 +27,16 @@ const drawerItems = [
   },
   {
     id: 2,
+    label: "Rides",
+    icon: "gift-sharp",
+    to: "Rides",
+  },
+  {
+    id: 3,
     label: "Wallet",
     icon: "wallet-sharp",
     to: "Wallet",
     subType: "Cash",
-  },
-  {
-    id: 3,
-    label: "Send a Gift",
-    icon: "gift-sharp",
-    to: "Gift",
   },
   {
     id: 4,

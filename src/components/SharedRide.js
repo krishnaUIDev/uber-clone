@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { useDispatch } from "react-redux";
 import { setMapScreen } from "../slices/navSlice";
+import CompletedRide from "./CompletedRide";
 
 const SharedRide = () => {
   const dispatch = useDispatch();
@@ -13,6 +14,8 @@ const SharedRide = () => {
   return (
     <View>
       <Text>test</Text>
+      {/* temperory */}
+      <CompletedRide />
     </View>
   );
 };

@@ -61,26 +61,6 @@ const Signup = () => {
     pickImage();
   };
 
-  const updateImageDb = async (uri, filename) => {
-    return new Promise(async (res, rej) => {
-      const response = await fetch(uri);
-      const file = await response.blob();
-      console.log(file, "file");
-      let upload = firebase.storage().ref(filename).put(file);
-      upload.on(
-        "state_changed",
-        (snapshot) => {},
-        (err) => {
-          rej(err);
-        },
-        async () => {
-          const url = await upload.snapshot.ref.getDownloadURL();
-          res(url);
-        }
-      );
-    });
-  };
-
   const onSignUp = () => {
     auth
       .createUserWithEmailAndPassword(email, pass)
