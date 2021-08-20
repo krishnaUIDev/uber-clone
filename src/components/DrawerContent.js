@@ -73,7 +73,7 @@ export function DrawerContent(props) {
     <View style={{ flex: 1 }}>
       <View style={tw`bg-black`}>
         <View
-          style={tw`pl-4 pb-2 flex-row mt-16 items-center border-b border-gray-200`}
+          style={tw`pl-4 pb-2 flex-row mt-16 items-center border-b border-gray-100`}
         >
           <Avatar.Image
             source={{

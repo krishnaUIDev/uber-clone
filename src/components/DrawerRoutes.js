@@ -8,7 +8,6 @@ import Profile from "../Screens/Profile";
 import Wallet from "../Screens/Wallet";
 import Settings from "../Screens/Settings";
 import ProfileAccount from "../Screens/Profile/ProfileAccount";
-import Rides from "../Screens/Rides";
 
 const DrawerRoutes = () => {
   const Drawer = createDrawerNavigator();
@@ -21,7 +20,7 @@ const DrawerRoutes = () => {
         initialRouteName="HomeScreen"
       />
       <Drawer.Screen name="Trips" component={Trips} />
-      <Drawer.Screen name="Rides" component={Rides} />
+      {/* <Drawer.Screen name="Rides" component={Rides} /> */}
       <Drawer.Screen name="Help" component={Help} />
       <Drawer.Screen name="Profile" component={Profile} />
       <Drawer.Screen name="Wallet" component={Wallet} />

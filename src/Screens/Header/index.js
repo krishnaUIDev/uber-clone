@@ -45,7 +45,13 @@ const index = () => {
         containerStyle={{ borderBottomColor: data?.backgroundColor }}
       />
       <View
-        style={[tw`p-6 pl-8 pr-0`, { backgroundColor: data?.backgroundColor }]}
+        style={[
+          tw`p-6 pl-8 pr-0`,
+          {
+            backgroundColor: data?.backgroundColor,
+            borderBottomRightRadius: 130,
+          },
+        ]}
       >
         <View style={tw``}>
           <Text

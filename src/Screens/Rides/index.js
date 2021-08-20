@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, SafeAreaView, View, FlatList } from "react-native";
 import { db, auth } from "../../firebase";
+import tw from "tailwind-react-native-classnames";
+import CustomButton from "../../Shared/CustomButton";
+import RideMap from "./RideMap";
+import firebase from "firebase";
 
 const Rides = () => {
   const [rides, setRides] = useState(null);
@@ -20,15 +24,29 @@ const Rides = () => {
         )
       );
     // console.log(unsubscribe);
-    // return unsubscribe;
+    return unsubscribe;
   }, []);
 
   console.log(rides, "rides");
 
   return (
-    <View>
-      <Text>Rides</Text>
-    </View>
+    <SafeAreaView style={tw`bg-white h-full`}>
+      <View
+        style={tw`flex-row justify-between items-center content-center px-4 mb-2 border-b border-gray-100`}
+      >
+        <Text style={tw`text-4xl font-semibold`}>Your Trips</Text>
+        <CustomButton label="Past" bgColor="gray-500" />
+      </View>
+      <View style={tw`p-2`}>
+        <CustomButton label="Rides" bgColor="black" />
+      </View>
+      <FlatList
+        data={rides}
+        keyExtractor={(item) => item.id}
+        // numColumns={numColumns}
+        renderItem={({ item: { data } }) => <RideMap data={data} />}
+      />
+    </SafeAreaView>
   );
 };
 

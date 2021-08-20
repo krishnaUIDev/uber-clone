@@ -7,6 +7,11 @@ import ForgotPass from "./src/Screens/Auth/ForgotPass";
 import Signup from "./src/Screens/Auth/Signup";
 import OnBoardingScreen from "./src/Screens/OnBoardingScreens";
 import DrawerRoutes from "./src/components/DrawerRoutes";
+import Rides from "./src/Screens/Rides";
+import { Icon } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
+import TripDetails from "./src/Screens/Rides/TripDetails";
+import Receipt from "./src/Screens/Rides/Receipt";
 
 const Stack = createStackNavigator();
 
@@ -32,6 +37,74 @@ const Auth = () => {
   );
 };
 
+const RidesStack = () => {
+  const navigation = useNavigation();
+
+  return (
+    <Stack.Navigator
+      initialRouteName="RideScreen"
+      screenOptions={{
+        headerStyle: { shadowColor: "#fff", elevation: 0 },
+      }}
+    >
+      <Stack.Screen
+        name="RideScreen"
+        component={Rides}
+        options={{
+          title: "",
+          headerLeft: () => (
+            <Icon
+              name="close"
+              type="ionicon"
+              color="#000"
+              size={30}
+              style={{ paddingLeft: 20 }}
+              backgroundColor="#fff"
+              onPress={() => navigation.navigate("HomeScreen")}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="TripDetails"
+        component={TripDetails}
+        options={{
+          title: "",
+          headerLeft: () => (
+            <Icon
+              name="close"
+              type="ionicon"
+              color="#000"
+              size={30}
+              style={{ paddingLeft: 20 }}
+              backgroundColor="#fff"
+              //  onPress={() => navigation.navigate("HomeScreen")}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="Receipt"
+        component={Receipt}
+        options={{
+          title: "",
+          headerLeft: () => (
+            <Icon
+              name="close"
+              type="ionicon"
+              color="#000"
+              size={30}
+              style={{ paddingLeft: 20 }}
+              backgroundColor="#fff"
+              //onPress={() => navigation.navigate("HomeScreen")}
+            />
+          ),
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
 const StackRoutes = () => {
   return (
     <Stack.Navigator initialRouteName="SplashScreen">
@@ -49,6 +122,11 @@ const StackRoutes = () => {
       <Stack.Screen
         name="DrawerNavigationRoutes"
         component={DrawerRoutes}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Rides"
+        component={RidesStack}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

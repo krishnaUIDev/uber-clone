@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import { StyleSheet, Image, Animated, Text } from "react-native";
+import { StyleSheet, Image } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 import tw from "tailwind-react-native-classnames";
 import { useDispatch, useSelector } from "react-redux";
@@ -99,6 +99,8 @@ const Map = () => {
     };
     getTravelTime();
   }, [origin, destination, GOOGLE_MAPS_APIKEY]);
+
+  console.log(origin, "originorigin");
 
   useEffect(() => {
     if (!origin) return;
