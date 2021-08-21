@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  StyleSheet,
-  FlatList,
-  Text,
-  View,
-  TouchableOpacity,
-} from "react-native";
+import { FlatList, Text, View, TouchableOpacity } from "react-native";
 import { Icon } from "react-native-elements";
 import tw from "tailwind-react-native-classnames";
 
@@ -52,5 +46,3 @@ const NavFavourites = () => {
 };
 
 export default NavFavourites;
-
-const styles = StyleSheet.create({});

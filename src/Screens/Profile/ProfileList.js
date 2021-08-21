@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import tw from "tailwind-react-native-classnames";
-import { Icon, ListItem, Button } from "react-native-elements";
+import { Icon, ListItem } from "react-native-elements";
 
 const list = [
   {
@@ -46,12 +46,6 @@ const ProfileList = ({ navigation }) => {
           </ListItem>
         ))}
       </View>
-      {/* <Button
-        style={tw`px-6`}
-        title="Logout"
-        type="outline"
-        onPress={() => navigation.navigate("Auth")}
-      /> */}
     </View>
   );
 };

@@ -12,6 +12,9 @@ import { Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
 import TripDetails from "./src/Screens/Rides/TripDetails";
 import Receipt from "./src/Screens/Rides/Receipt";
+import Settings from "./src/Screens/Settings";
+import FavMap from "./src/Screens/Settings/FavMap";
+import SavedPlaces from "./src/Screens/Settings/SavedPlaces";
 
 const Stack = createStackNavigator();
 
@@ -32,6 +35,60 @@ const Auth = () => {
         name="ForgotScreen"
         component={ForgotPass}
         options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+const SettingsStack = () => {
+  const navigation = useNavigation();
+  return (
+    <Stack.Navigator
+      initialRouteName="SettingsScreen"
+      screenOptions={{
+        headerStyle: { shadowColor: "#fff", elevation: 0 },
+      }}
+    >
+      <Stack.Screen
+        name="SettingsScreen"
+        component={Settings}
+        options={{
+          title: "",
+          headerLeft: () => (
+            <Icon
+              name="close"
+              type="ionicon"
+              color="#000"
+              size={30}
+              style={{ paddingLeft: 20 }}
+              backgroundColor="#fff"
+              onPress={() => navigation.navigate("HomeScreen")}
+            />
+          ),
+        }}
+      />
+      <Stack.Screen
+        name="FavMap"
+        component={FavMap}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SavedPlaces"
+        component={SavedPlaces}
+        options={{
+          title: "",
+          headerLeft: () => (
+            <Icon
+              name="close"
+              type="ionicon"
+              color="#000"
+              size={30}
+              style={{ paddingLeft: 20 }}
+              backgroundColor="#fff"
+              onPress={() => navigation.navigate("SettingsScreen")}
+            />
+          ),
+        }}
       />
     </Stack.Navigator>
   );
@@ -127,6 +184,11 @@ const StackRoutes = () => {
       <Stack.Screen
         name="Rides"
         component={RidesStack}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Settings"
+        component={SettingsStack}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
