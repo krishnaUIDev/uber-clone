@@ -20,7 +20,13 @@ const RideMap = ({ data }) => {
   const rideDate = new Date(data.timeStamp.seconds * 1000);
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("TripDetails")}>
+    <TouchableOpacity
+      onPress={() =>
+        navigation.navigate("TripDetails", {
+          data,
+        })
+      }
+    >
       <View style={tw`flex-row justify-between items-center p-4`}>
         <Text>{rideDate.toDateString()}</Text>
         <View style={tw`flex-row items-center`}>

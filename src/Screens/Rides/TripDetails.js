@@ -13,7 +13,10 @@ import { GOOGLE_MAPS_APIKEY } from "@env";
 import { useNavigation } from "@react-navigation/core";
 import { Icon } from "react-native-elements";
 
-const TripDetails = () => {
+const TripDetails = ({ route }) => {
+  const { data } = route.params;
+  const rideDate = new Date(data.timeStamp.seconds * 1000);
+
   const navigation = useNavigation();
 
   const mapRef = useRef(null);
@@ -35,32 +38,32 @@ const TripDetails = () => {
           mapType="mutedStandard"
           flat={true}
           initialRegion={{
-            latitude: 31.3321838,
-            longitude: -81.65565099999999,
+            latitude: data?.origin?.location?.lat,
+            longitude: data?.origin?.location?.lng,
             latitudeDelta: 0.005,
             longitudeDelta: 0.005,
           }}
         >
           <Marker
             coordinate={{
-              latitude: 31.3321838,
-              longitude: -81.65565099999999,
+              latitude: data?.origin?.location?.lat,
+              longitude: data?.origin?.location?.lng,
             }}
             identifier="origin"
           >
             <Icon name="car-sport-sharp" type="ionicon" color="#4B5563" />
           </Marker>
           <MapViewDirections
-            origin={"Jacksonville, FL, USA"}
-            destination={"Orlando, FL, USA"}
+            origin={data?.origin?.description}
+            destination={data?.destination?.description}
             apikey={GOOGLE_MAPS_APIKEY}
             strokeColor="#374151"
             strokeWidth={3}
           />
           <Marker
             coordinate={{
-              latitude: 31.3321838,
-              longitude: -81.65565099999999,
+              latitude: data?.destination?.location?.lat,
+              longitude: data?.destination?.location?.lng,
             }}
             identifier="destination"
           >
@@ -73,7 +76,7 @@ const TripDetails = () => {
           <View
             style={tw`flex-row justify-between items-center content-center py-2 mb-4`}
           >
-            <Text style={tw`text-sm`}>6/21/21 6:46pm</Text>
+            <Text style={tw`text-sm`}>{rideDate.toDateString()}</Text>
             <View style={tw`items-end`}>
               <Text style={tw`text-sm`}>$0.00</Text>
               <Text style={tw`text-sm text-blue-600 font-bold`}>Add a tip</Text>
@@ -97,10 +100,10 @@ const TripDetails = () => {
             </View>
             <View>
               <Text style={tw`text-sm font-light tracking-tight mb-4`}>
-                4096 Gate Pkwy, Jacksonville, FL {"\n"} 32266
+                {data?.origin?.description}
               </Text>
               <Text style={tw`text-sm font-light tracking-tight`}>
-                4096 Gate Pkwy, Jacksonville, FL {"\n"} 32266
+                {data?.destination?.description}
               </Text>
             </View>
             <TouchableOpacity

@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, TouchableOpacity, Text } from "react-native";
+import { View, Image, TouchableOpacity, Text, ScrollView } from "react-native";
 import tw from "tailwind-react-native-classnames";
 import { Header } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
@@ -24,6 +24,15 @@ const headerData = [
     buttonWidth: 36,
     image:
       "https://res.cloudinary.com/dkenwnhn8/image/upload/v1627844344/uber-assets/UberXL_g7akai.webp",
+  },
+  {
+    title: "$20 off",
+    subTitle: "You have a promo to use",
+    backgroundColor: "#46b276",
+    buttonContent: "Order now",
+    textColor: "white",
+    buttonWidth: 24,
+    image: "https://d4p17acsd5wyj.cloudfront.net/shortcuts/cuisines/wings.png",
   },
 ];
 
