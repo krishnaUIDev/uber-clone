@@ -8,9 +8,9 @@ const headerData = [
   {
     title: "Go out with Uber",
     subTitle: "Go meet your crew and enjoy the return of in-person hangs",
-    backgroundColor: "#ffc044",
+    backgroundColor: "#008C8C",
     buttonContent: "Ride now",
-    textColor: "black",
+    textColor: "white",
     buttonWidth: 20,
     image:
       "https://res.cloudinary.com/dkenwnhn8/image/upload/v1627844344/uber-assets/UberX_Pet_uwu6wy.png",
@@ -18,7 +18,7 @@ const headerData = [
   {
     title: "Time to ride in comfort",
     subTitle: "Ask your driver to lower the temperature through the app",
-    backgroundColor: "#286ef0",
+    backgroundColor: "#1EA5FC",
     buttonContent: "Ride in Comfort",
     textColor: "white",
     buttonWidth: 36,

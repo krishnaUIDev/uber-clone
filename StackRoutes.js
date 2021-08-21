@@ -72,13 +72,13 @@ const RidesStack = () => {
           title: "",
           headerLeft: () => (
             <Icon
-              name="close"
+              name="arrow-back-outline"
               type="ionicon"
               color="#000"
               size={30}
               style={{ paddingLeft: 20 }}
               backgroundColor="#fff"
-              //  onPress={() => navigation.navigate("HomeScreen")}
+              onPress={() => navigation.navigate("RideScreen")}
             />
           ),
         }}
@@ -90,13 +90,13 @@ const RidesStack = () => {
           title: "",
           headerLeft: () => (
             <Icon
-              name="close"
+              name="arrow-back-outline"
               type="ionicon"
               color="#000"
               size={30}
               style={{ paddingLeft: 20 }}
               backgroundColor="#fff"
-              //onPress={() => navigation.navigate("HomeScreen")}
+              onPress={() => navigation.navigate("TripDetails")}
             />
           ),
         }}

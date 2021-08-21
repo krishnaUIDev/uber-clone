@@ -4,7 +4,6 @@ import { db, auth } from "../../firebase";
 import tw from "tailwind-react-native-classnames";
 import CustomButton from "../../Shared/CustomButton";
 import RideMap from "./RideMap";
-import firebase from "firebase";
 
 const Rides = () => {
   const [rides, setRides] = useState(null);
