@@ -3,18 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   theme: false,
   user: {},
-  favorites: [
-    {
-      title: "Home",
-      location: "9727 touchton road",
-      icon: "home",
-    },
-    {
-      title: "Work",
-      location: "9727 touchton road",
-      icon: "briefcase",
-    },
-  ],
+  favorites: [],
 };
 
 export const userSlice = createSlice({
@@ -28,12 +17,15 @@ export const userSlice = createSlice({
       state.theme = action.payload;
     },
     setFavorites: (state, action) => {
-      state.favorites = { ...action.payload };
+      const updatedVal = state.favorites.filter(
+        (f) => f.routeParam !== action.payload.routeParam
+      );
+      state.favorites = [...updatedVal, action.payload];
     },
   },
 });
 
-export const { setTheme, setUser } = userSlice.actions;
+export const { setTheme, setUser, setFavorites } = userSlice.actions;
 
 export const getTheme = (state) => state.user.theme;
 

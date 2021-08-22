@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Text,
   View,
@@ -10,6 +10,8 @@ import { Icon, Avatar, ListItem } from "react-native-elements";
 import { useSelector } from "react-redux";
 import tw from "tailwind-react-native-classnames";
 import { getFavorites, getUserDetails } from "../../slices/userSlice";
+import firebase from "firebase";
+import { auth, db } from "../../firebase";
 
 const safetyList = [
   {
@@ -35,6 +37,34 @@ const safetyList = [
 export default function Settings({ navigation }) {
   const userInfo = useSelector(getUserDetails);
   const favPlaces = useSelector(getFavorites);
+  const [selectedFav, setSelectedFav] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = firebase
+      .firestore()
+      .collection("favPlaces")
+      .onSnapshot((snapshot) => {
+        const data = snapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setSelectedFav(data);
+      });
+
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    if (favPlaces.length > 0) {
+      db.collection("favPlaces")
+        .doc(auth.currentUser.uid)
+        .set({ ...favPlaces });
+    }
+  }, [favPlaces]);
+
+  const home = favPlaces?.filter((item) => item.routeParam === "home");
+  const work = favPlaces?.filter((item) => item.routeParam === "work");
+
   return (
     <SafeAreaView style={tw`bg-gray-100 h-full`}>
       <View style={tw`flex-row justify-between  px-4 bg-white`}>
@@ -81,8 +111,14 @@ export default function Settings({ navigation }) {
           <ListItem.Content>
             <ListItem.Title>
               <View>
-                <Text style={tw`text-base font-semibold`}>Add Home</Text>
-                <Text style={tw`text-sm font-normal`}>9727 touchton road</Text>
+                <Text style={tw`text-base font-semibold`}>
+                  {home && home.length > 0 ? "Home" : "Add Home"}
+                </Text>
+                {home && home.length > 0 && (
+                  <Text style={tw`text-sm font-normal`}>
+                    {home[0]?.description}
+                  </Text>
+                )}
               </View>
             </ListItem.Title>
           </ListItem.Content>
@@ -107,8 +143,14 @@ export default function Settings({ navigation }) {
           <ListItem.Content>
             <ListItem.Title style={tw`text-sm`}>
               <View>
-                <Text style={tw`text-base font-semibold`}>Add Work</Text>
-                <Text style={tw`text-sm font-normal`}>9727 touchton road</Text>
+                <Text style={tw`text-base font-semibold`}>
+                  {work && work.length > 0 ? "Work" : "Add Work"}
+                </Text>
+                {work && work.length > 0 && (
+                  <Text style={tw`text-sm font-normal`}>
+                    {work[0]?.description}
+                  </Text>
+                )}
               </View>
             </ListItem.Title>
           </ListItem.Content>

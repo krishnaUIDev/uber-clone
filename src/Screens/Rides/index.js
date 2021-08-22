@@ -26,8 +26,6 @@ const Rides = () => {
     return unsubscribe;
   }, []);
 
-  console.log(rides, "rides");
-
   return (
     <SafeAreaView style={tw`bg-white h-full`}>
       <View

@@ -57,7 +57,7 @@ const HomeScreen = () => {
         phone: auth?.currentUser?.phoneNumber,
       })
     );
-  }, []);
+  }, [auth]);
 
   const data = headerData[Math.floor(Math.random() * headerData.length)];
 

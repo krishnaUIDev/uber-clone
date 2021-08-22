@@ -7,14 +7,24 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import { GOOGLE_MAPS_APIKEY } from "@env";
 import { StatusBar } from "expo-status-bar";
 import * as Location from "expo-location";
+import { useDispatch, useSelector } from "react-redux";
+import { setFavorites, getFavorites } from "../../slices/userSlice";
 
-const FavMap = ({ navigation }) => {
+const FavMap = ({ route, navigation }) => {
   const mapRef = useRef(null);
+  const dispatch = useDispatch();
+  const favInfo = useSelector(getFavorites);
+  const { routeParam } = route.params;
+
+  const filterFavItem = favInfo.filter(
+    (item) => item.routeParam === routeParam
+  );
+
   useEffect(() => {
     mapRef.current.fitToSuppliedMarkers(["origin"], {
       edgePadding: { top: 10, right: 50, bottom: 50, left: 50 },
     });
-  }, []);
+  }, [favInfo, location]);
 
   const [currentLocation, setCurrentLocation] = useState(null);
   const [location, setLocation] = useState(null);
@@ -36,14 +46,14 @@ const FavMap = ({ navigation }) => {
   let text = "Waiting..";
   if (errorMsg) {
     text = errorMsg;
-  } else if (location) {
-    text = JSON.stringify(location);
+  } else if (currentLocation) {
+    text = JSON.stringify(currentLocation);
   }
 
   const handleSetCurrent = () => {
     setLocation({
-      latitude: currentLocation?.latitude,
-      longitude: currentLocation?.longitude,
+      latitude: currentLocation?.coords?.latitude,
+      longitude: currentLocation?.coords?.longitude,
     });
   };
 
@@ -72,16 +82,20 @@ const FavMap = ({ navigation }) => {
             minLength={2}
             nearbyPlacesAPI="GooglePlacesSearch"
             debounce={400}
-            returnKeyType={"search"}
-            // onPress={(data, details = null) => {
-            //   dispatch(
-            //     setOrigin({
-            //       location: details.geometry.location,
-            //       description: data.description,
-            //     })
-            //   );
-            //   dispatch(setDesination(null));
+            // textInputProps={{
+            //   value: null,
             // }}
+            returnKeyType={"search"}
+            onPress={(data, details = null) => {
+              setLocation(null);
+              dispatch(
+                setFavorites({
+                  location: details.geometry.location,
+                  description: data.description,
+                  routeParam,
+                })
+              );
+            }}
             fetchDetails={true}
             query={{
               key: GOOGLE_MAPS_APIKEY,
@@ -98,16 +112,16 @@ const FavMap = ({ navigation }) => {
           showsUserLocation={true}
           flat={true}
           initialRegion={{
-            latitude: 31.3321838,
-            longitude: -81.65565099999999,
+            latitude: filterFavItem[0]?.location?.lat,
+            longitude: filterFavItem[0]?.location?.lng,
             latitudeDelta: 0.005,
             longitudeDelta: 0.005,
           }}
         >
           <Marker
             coordinate={{
-              latitude: 31.3321838,
-              longitude: -81.65565099999999,
+              latitude: filterFavItem[0]?.location?.lat,
+              longitude: filterFavItem[0]?.location?.lng,
             }}
             identifier="origin"
           >
@@ -123,7 +137,12 @@ const FavMap = ({ navigation }) => {
           >
             <Icon name="locate" type="ionicon" />
           </TouchableOpacity>
-          <TouchableOpacity style={tw`bg-black py-3 mx-8 bg-black w-80`}>
+          <TouchableOpacity
+            style={tw`bg-black py-3 mx-8 bg-black w-80 ${
+              !favInfo && "bg-gray-200"
+            }`}
+            disabled={!favInfo}
+          >
             <Text style={tw`text-center text-white text-xl`}>Done</Text>
           </TouchableOpacity>
         </View>

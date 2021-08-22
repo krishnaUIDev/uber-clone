@@ -26,7 +26,6 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
-  const [response, setResponse] = useState(null);
   const [profile, setProfile] = useState(null);
 
   const getPermission = async () => {
